@@ -1,0 +1,55 @@
+#!/bin/bash
+
+# Function to chose the difficulty
+chose_difficulty(){
+
+    echo "Press a number to chose the difficulty                                                                                                          
+                                                                                                                                                          
+         1 -> Normal    2 -> Difficulty   3 -> Insane ";
+    
+    read level
+
+    if [[ $level -eq 1 ]]; then
+
+        echo "You choosed Normal"
+    elif [[ $level -eq 2  ]]; then
+
+        echo "You choosed Difficult and every enemy statistics is multiplied by 1.5"
+    elif [[ $level -eq 3  ]]; then
+
+        echo "You choosed Insane and every enemy statistics is multiplied by 2"
+    fi
+    
+}
+
+# Set the number of fights
+
+set_number_fights(){
+    
+    echo "Press a number to chose the number of fights
+
+         1 -> 10 fights   <===>   2 -> 20 fights   <===>   3 -> 50 fights < ===>   4 -> 100 fights";
+
+    read numberFights
+    
+    if [[ $numberFights -eq 1 ]]; then
+
+        echo "You choosed 10 fights"
+        
+    elif [[ $numberFights -eq 2 ]]; then
+
+        echo "You choosed 20 fights"
+
+    elif [[ $numberFights -eq 3 ]]; then
+
+        echo "You choosed 50 fights"
+
+    elif [[ $numberFights -eq 4  ]]; then
+
+        echo "You choosed 100 fights"
+
+    fi
+}
+
+export -f chose_difficulty set_number_fights 
+

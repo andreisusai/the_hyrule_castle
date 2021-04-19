@@ -1,0 +1,40 @@
+#!/bin/bash
+
+source "basic_game_customization.sh"
+source "basic_characteristics.sh"
+
+#Game variables                                                                                                                 
+
+quitGame=0
+echo "New game press 1 ==================== Press 0 to quit"
+read newGame
+
+
+# Player varibles                                                                                                               
+
+initialCoins=12
+
+
+# Game Loop
+
+game(){
+
+    # Game Loop                                                                                                                     
+while [ $quitGame -lt $newGame ]; do
+
+    chose_difficulty
+
+    set_number_fights
+
+    display_characters
+
+    display_character
+
+    get_enemy
+    echo "You have ${initialCoins} coins to begin with. Good Luck !"
+    
+done
+    
+}
+
+game
