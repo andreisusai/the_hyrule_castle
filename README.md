@@ -1,2 +1,5 @@
-# Groupe de susai_a 855153
+# The Hyrule Castle game
 
+# Start
+
+./game.sh
