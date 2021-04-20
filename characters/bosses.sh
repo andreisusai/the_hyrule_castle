@@ -90,7 +90,7 @@ get_boss(){
             first_line=1
         fi
 
-    done < bosses.csv
+    done < src/bosses.csv
 
 
                 echo "

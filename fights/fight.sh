@@ -1,7 +1,8 @@
 #!/bin/bash
-source "basic_game_customization.sh"
-source "basic_characteristics.sh"
-source "bosses_fight.sh"
+source "customization/basic_game_customization.sh"
+source "characters/basic_characteristics.sh"
+source "customization/random_game_events.sh"
+source "fights/bosses_fight.sh"
 
 fight(){    
 
@@ -9,7 +10,7 @@ fight(){
     
     get_enemy
 
-    count=9
+    count=1
     coins=12
     currentHp=$hp
     currentDifficulty=$difficulty
@@ -65,13 +66,18 @@ ${nameEnemy} attacked and dealt 10 damages
             if [[ $currentHp -le 0 ]]; then
             coins=$((coins-1))
             currentHp=$hp
-            echo "You have ${coins} coins out of 12 left"
+            echo "
+========================================
+You have ${coins} coins out of 12 left 
+========================================
+"
 
             fi
 
             if [[ $currentHpE -le 0  ]]; then
                 # When count equal to 10 a boss is encounter
                 if [[ $count -eq 10 ]]; then
+                    count=1
                     get_boss
                     fight_boss
                     export newGame=$newGame
@@ -84,10 +90,12 @@ You destroyed ${nameEnemy} and get to go to the next floor !
 ==================================================================="
                 get_enemy
                 currentDifficulty=$difficulty
+                room
+                currentRandomHp=$randomHp
+                currentHp=$((currentHp+currentRandomHp))
                 HpE=$hpE
                 currentHpE=$((HpE*currentDifficulty))
                 count=$((count+1))
-
             fi
             
           fi      

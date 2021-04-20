@@ -2,17 +2,23 @@
 
 # Display and chose characters
 
-first_line=0
-
 display_characters(){
-
-    echo "=========== CHARACTERS =========="
+first_line=0
+    echo "
+    
+=========== CHARACTERS ==========
+    
+    "
     
     while IFS="," read -r id name hp mp str int def res spd luck race class rarity  ; do
 
         if [[ $first_line -ne 0  ]]; then
 
-            echo "=========== $name ============="
+            echo "
+            
+=========== $name =============
+
+"
             
             echo "Name:" "$name"
             echo "Hp:" $hp
@@ -44,7 +50,7 @@ display_characters(){
                     first_line=1
                 fi
 
-            done < races.csv
+            done < src/races.csv
 
             # Get the character's classe
 
@@ -68,14 +74,14 @@ display_characters(){
                     first_line=1
                 fi
 
-            done < classes.csv
+            done < src/classes.csv
             
             echo "Rarity:" $rarity
         else
             first_line=1
         fi
             
-    done < players.csv
+    done < src/players.csv
     
 }
 
@@ -84,17 +90,31 @@ display_characters(){
 display_character(){
     
     first_line=0
+    matching_name_character=0
     shopt -s nocasematch
-    echo "====== Please, insert the name character of your choice ======="
+    
+    if [[ $matching_name_character -eq 0 ]]; then
+    echo "
+    
+====== Please, insert the name character of your choice =======
+    
+    "
+    fi
     read choice
 
     while IFS="," read -r id nameCharacter hp mp str int def res spd luck race class rarity  ; do
 
         if [[ $first_line -ne 0  ]]; then
 
-            if [[ $(tr "[:upper:]" "[:lower:]" <<<"$choice") = $(tr "[:upper:]" "[:lower:]" <<<"$nameCharacter") ]]; then
+            if [[ $(tr "[:upper:]" "[:lower:]" <<<"$choice") == $(tr "[:upper:]" "[:lower:]" <<<"$nameCharacter") ]]; then
             
-            echo "=========== $nameCharacter ============="
+            matching_name_character=0
+
+            echo "
+
+=========== $nameCharacter =============
+
+"
             
             echo "Name:" "$nameCharacter"
             echo "Hp:" $hp
@@ -129,7 +149,7 @@ display_character(){
                     first_line=1
                 fi
 
-            done < races.csv
+            done < src/races.csv
             
             # Get the character's classe                                                                                                                                                                                            
 
@@ -158,24 +178,31 @@ display_character(){
                     first_line=1
                 fi
 
-            done < classes.csv
+            done < src/classes.csv
 
             echo "Rarity:" $rarity
             break
           fi
         else
+            matching_name_character=1
             first_line=1
         fi
 
-    done < players.csv
+    done < src/players.csv
 
-    echo "======= Good Choice -> $nameCharacter  ======="
+    while [[ $matching_name_character -eq 1 ]]; do
+        display_character
+    done
 
 }
 
 # Get enemies
 
 get_enemy(){
+
+    echo "
+    
+======= Good Choice -> $nameCharacter  ======="
 
     echo "
     
@@ -187,13 +214,17 @@ get_enemy(){
 
     randomId=$((1 + $RANDOM % 12))
     
-    while IFS="," read -r id nameEnemy hpE mpE strE intE defE resE spdE luckE race class rarity  ; do
+    while IFS="," read -r id nameEnemy hpE mpE strE intE defE resE spdE luckE race class rarityE  ; do
 
         if [[ $first_line -ne 0  ]]; then
 
             if [[ $randomId -eq $id ]]; then
             
-            echo "=========== $nameEnemy ============="
+            echo "
+            
+=========== $nameEnemy =============
+            
+            "
 
             echo "Name:" "$nameEnemy"
             echo "Hp:" $hpE
@@ -229,7 +260,7 @@ get_enemy(){
                     first_line=1
                 fi
 
-            done < races.csv
+            done < src/races.csv
 
             # Get the enemies classe
             
@@ -258,16 +289,16 @@ get_enemy(){
                     first_line=1
                 fi
 
-            done < classes.csv
+            done < src/classes.csv
 
-            echo "Rarity:" $rarity
+            echo "Rarity:" $rarityE
             break
           fi
         else
             first_line=1
         fi
 
-    done < enemies.csv
+    done < src/enemies.csv
 
 }
 

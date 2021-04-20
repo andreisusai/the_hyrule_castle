@@ -1,12 +1,12 @@
 #!/bin/bash
 
-source "basic_game_customization.sh"
-source "fight.sh"
+source "customization/basic_game_customization.sh"
+source "fights/fight.sh"
 
 #Game variables                                                                      
 
 export quitGame=0
-echo "New game press 1 ==================== Press 0 to quit"
+echo "For new game press 1 ==================== To quit press another button"
 read newGame
 
 
@@ -24,12 +24,6 @@ while [ $quitGame -lt $newGame ]; do
         
     done
 
-    set_number_fights
-
-    while [[ $number_of_fights -eq 0 ]]; do
-        set_number_fights
-    done
-
     display_characters
 
     fight
@@ -37,5 +31,6 @@ while [ $quitGame -lt $newGame ]; do
 done
     
 }
-
-game
+if [[ $newGame -eq 1 ]]; then
+    game
+fi

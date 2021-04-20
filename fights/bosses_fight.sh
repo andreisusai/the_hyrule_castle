@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source "bosses.sh"
+source "characters/bosses.sh"
 
 fight_boss(){
 
@@ -31,7 +31,11 @@ Boss Hp ${currentHpB}
             
             coins=$((coins-1))
             currentHp=$hp
-            echo "You have ${coins} coins out of 12 left"
+            echo "
+========================================
+You have ${coins} coins out of 12 left 
+========================================
+"
 
         fi
 
@@ -41,7 +45,7 @@ Boss Hp ${currentHpB}
                 You lost !
                 Press 1 to start a new game ==================== Press 0 to quit   
             "
-            read newGame
+                read newGame
                 export newGame
                 break;
 
